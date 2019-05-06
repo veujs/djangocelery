@@ -253,3 +253,105 @@ class UserGroupView(APIView):
             print(ser.errors)
         return HttpResponse('提交数据')
 
+
+
+
+
+class PagerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Role
+        fields = "__all__"
+
+from rest_framework.pagination import PageNumberPagination
+
+from rest_framework.response import Response
+class Pager1View(APIView):
+
+    def get(self,request,*args,**kwargs):
+        roles = models.Role.objects.all()
+        pg = PageNumberPagination()
+        pg_roles = pg.paginate_queryset(queryset=roles,request=request,view=self)
+        print(pg_roles)
+        ser = PagerSerializer(instance=pg_roles,many=True)
+        # ret = json.dumps(ser.data,ensure_ascii=False)ss
+        # return Response(ret)
+        return Response(ser.data)
+
+
+
+
+
+from rest_framework.pagination import LimitOffsetPagination
+class MyPagination(LimitOffsetPagination):
+
+    default_limit = 2 # page_size设置为2，如果不设置，就默认为settings中设置的PAGE_SIZE大小
+    limit_query_param = 'limit'
+    offset_query_param = 'offset'
+    max_limit = 5
+
+from rest_framework.response import Response
+class Pager2View(APIView):
+
+    def get(self,request,*args,**kwargs):
+        roles = models.Role.objects.all()
+        pg = MyPagination()
+        pg_roles = pg.paginate_queryset(queryset=roles,request=request,view=self)
+        # print(pg_roles)
+        ser = PagerSerializer(instance=pg_roles,many=True)
+        # ret = json.dumps(ser.data,ensure_ascii=False)ss
+        # return Response(ret)
+        return Response(ser.data)
+
+
+from rest_framework.pagination import CursorPagination
+class MyPagination3(CursorPagination):
+
+    cursor_query_param = 'cursor'
+    page_size = 2
+    ordering = 'id'
+
+    # Client can control the page size using this query parameter.
+    # Default is 'None'. Set to eg 'page_size' to enable usage.
+    page_size_query_param = None
+    max_page_size = 5
+
+from rest_framework.response import Response
+class Pager3View(APIView):
+
+    def get(self,request,*args,**kwargs):
+        roles = models.Role.objects.all()
+        pg = MyPagination3()
+        pg_roles = pg.paginate_queryset(queryset=roles,request=request,view=self)
+        # print(pg_roles)
+        ser = PagerSerializer(instance=pg_roles,many=True)
+        # ret = json.dumps(ser.data,ensure_ascii=False)ss
+        # return Response(ret)
+        # return Response(ser.data)
+        return pg.get_paginated_response(ser.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

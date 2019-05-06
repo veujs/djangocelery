@@ -209,7 +209,8 @@ REST_FRAMEWORK = {
     # """以下是restframework中的通过url路径来传递版本参数的配置方法"""
     "DEFAULT_VERSIONING_CLASS": 'rest_framework.versioning.URLPathVersioning',
 
-
+    # 每页显示两条数据
+    'PAGE_SIZE': 2,
 
 
 }

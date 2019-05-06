@@ -22,9 +22,19 @@ urlpatterns = [
     # 在序列化的基础上，添加url来访问
     url(r'^(?P<version>[v1|v2]+)/group/(?P<ww>\d+)/$', views.GroupView.as_view(), name='gp'),
 
-    # 序列化中的字段验证
+    # 序列化中的字段验证测试
     url(r'^(?P<version>[v1|v2]+)/usergroup/$', views.UserGroupView.as_view()),
 
+
+    # 分页测试
+    # 分页测试-基于PageNumberPagination类实现分页
+    url(r'^(?P<version>[v1|v2]+)/pager1/$', views.Pager1View.as_view()),
+
+    # 分页测试-基于LimitOffsetPagination类实现分页
+    url(r'^(?P<version>[v1|v2]+)/pager2/$', views.Pager2View.as_view()),
+
+    # 分页测试-CursorPagination类实现分页,url中页码参数加密
+    url(r'^(?P<version>[v1|v2]+)/pager3/$', views.Pager3View.as_view()),
 
     # url(r'^admin/', admin.site.urls),
     # url(r'^docs/', include_docs_urls(title='爬虫任务调度系统文档')),
