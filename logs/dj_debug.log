@@ -1,0 +1,42 @@
+2019-05-07 16:19:45,040 [Thread-3:139898550494976] [django.request:228] [log:log_response] [WARNING]- Not Found: /favicon.ico
+2019-05-07 16:19:50,904 [Thread-5:139898550494976] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:20:39,125 [Thread-7:139898550494976] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:25:28,833 [Thread-2:139858788108032] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:25:30,876 [Thread-3:139858788108032] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:25:32,331 [Thread-4:139858788108032] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:26:53,252 [Thread-3:140007794480896] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:30:27,455 [Thread-1:139774050506496] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 16:31:23,926 [Thread-1:140004013299456] [django.request:228] [log:log_response] [ERROR]- Internal Server Error: /v1/docs/
+Traceback (most recent call last):
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/core/handlers/base.py", line 156, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/core/handlers/base.py", line 154, in _get_response
+    response = response.render()
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/response.py", line 106, in render
+    self.content = self.rendered_content
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/rest_framework/response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/rest_framework/renderers.py", line 877, in render
+    return template.render(context, request=renderer_context['request'])
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/base.py", line 937, in render
+    bit = node.render_annotated(context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/base.py", line 904, in render_annotated
+    return self.render(context)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/template/defaulttags.py", line 442, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/urls/base.py", line 90, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/wangzhipeng/.local/lib/python3.6/site-packages/django/urls/resolvers.py", line 622, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'schema-js' with no arguments not found. 1 pattern(s) tried: ['(?P<version>[v1|v2]+)/docs/schema.js$']
+2019-05-07 17:00:42,675 [Thread-3:140551685547776] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 17:04:05,060 [Thread-3:140609674438400] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
+2019-05-07 17:04:39,806 [Thread-4:139837484750592] [django.request:228] [log:log_response] [WARNING]- Not Found: /docs/
