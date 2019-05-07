@@ -36,13 +36,20 @@ urlpatterns = [
     # 分页测试-CursorPagination类实现分页,url中页码参数加密
     url(r'^(?P<version>[v1|v2]+)/pager3/$', views.Pager3View.as_view()),
 
-    # url(r'^admin/', admin.site.urls),
-    # url(r'^docs/', include_docs_urls(title='爬虫任务调度系统文档')),
-    # url(r'^api/', include('apps.spiders.urls')),
-    # url(r'^api/', include('apps.orders.urls')),
-    # url(r'^api/', include('apps.source.urls')),
-    # url(r'^api/', include('apps.verification.urls')),
-    # url(r'^api/', include('apps.aliPay.urls')),
+    # 视图 - 基于GenericAPIView类实现（不常用）
+    url(r'^(?P<version>[v1|v2]+)/generic/$', views.GenericView.as_view()),
+
+    # 视图 - 基于GenericViewset类实现  注意：从这里开始  url中as_view()中需要额外指定method，类似于{'get':'list','post':'create'}
+    url(r'^(?P<version>[v1|v2]+)/genericviewset/$', views.GenericViewsetView.as_view({'get': 'list'})),
+
+    # 视图 - 基于ModelViewset类实现  注意：从这里开始  url中as_view()中需要额外指定method，类似于{'get':'list','post':'create'}
+    url(r'^(?P<version>[v1|v2]+)/modelviewset/$', views.ModelViewsetView.as_view({'get': 'list','post':'create'})),
+    url(r'^(?P<version>[v1|v2]+)/modelviewset\.(?P<format>[\w]+)$', views.ModelViewsetView.as_view({'get': 'list','post':'create'})),
+
+
+    url(r'^(?P<version>[v1|v2]+)/modelviewset/(?P<pk>[\w]+)/$', views.ModelViewsetView.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update', 'patch': 'partial_update'})),
+    url(r'^(?P<version>[v1|v2]+)/modelviewset/(?P<pk>[\w]+)\.(?P<format>[\w]+)$', views.ModelViewsetView.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update', 'patch': 'partial_update'})),
+
 ]
 
 

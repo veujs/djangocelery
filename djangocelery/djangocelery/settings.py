@@ -145,18 +145,21 @@ CELERY_ACCEPT_CONTENT = ['json']                    # 指定任务接受的内�
 CELERY_IMPORTS = ('app1.tasks', )                    # 定义任务所在的模块
 CELERY_TIMEZONE = 'Asia/Shanghai'                   # 时区设置，计划任务需要，推荐 Asia/Shanghai
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-CELERYD_CONCURRENCY = 4                             # worker并发数   任务消费者的并发数
+CELERYD_CONCURRENCY = 1                             # worker并发数   任务消费者的并发数
 CELERYD_PREFETCH_MULTIPLIER = 1  # 每个worker 领取一个任务
 CELERYD_FORCE_EXECV = True
 CELERYD_MAX_TASKS_PER_CHILD = 100  # 每个worker最多执行玩100个任务就会被销毁，可防止内存泄露
 
 
 
-# CELERY_FORCE_EXECV = True# 有些情况可以防止死锁
+CELERY_FORCE_EXECV = True# 有些情况可以防止死锁
 # CELERY_QUEUES # Celery队列设定
-CELERY_TASK_RESULT_EXPIRES = 60 # 60 * 60 * 24   # 任务过期时间
+CELERY_TASK_RESULT_EXPIRES = 5 # 60 * 60 * 24   # 任务结果的过期时间，在上边设置的redis中
 # 规定完成任务的时间
-# CELERYD_TASK_TIME_LIMIT = 15 * 60 # 在15分钟内完成任务，否则执行该任务的worker将被杀死，任务移交给父进程
+# CELERYD_TASK_TIME_LIMIT = 5 #15 * 60 # 在15分钟内完成任务，否则执行该任务的worker将被杀死，任务移交给父进程
+
+# BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3} # 任务发出后，经过一段时间还未收到acknowledge , 就将任务重新交给其他worker执行
+
 
 # celery的定时任务都是有celery beat来进行调度，celery beat默认按照settings.py之中的时区时间来调度定时任务。
 # celery 创建定时任务  Celery计划任务设定
@@ -168,7 +171,24 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(seconds=5),
         "args": (100, 200),
     },
+    # # 定时任务二：　每隔s运行一次
+    # 'task2': {
+    #     "task": "app1.tasks.add1",
+    #     "schedule": timedelta(seconds=3),
+    #     "args": (10, 20),
+    # },
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 # RESTFRAMEWORK 认证配置参数,全剧设置
@@ -207,7 +227,7 @@ REST_FRAMEWORK = {
     'VERSION_PARAM': "version",# 设置url中参数的关键字    比如：http://127.0.0.1:8000/?version==v1中的version为前边设置的字符串
 
     # """以下是restframework中的通过url路径来传递版本参数的配置方法"""
-    "DEFAULT_VERSIONING_CLASS": 'rest_framework.versioning.URLPathVersioning',
+    # "DEFAULT_VERSIONING_CLASS": 'rest_framework.versioning.URLPathVersioning',
 
     # 每页显示两条数据
     'PAGE_SIZE': 2,
@@ -216,6 +236,71 @@ REST_FRAMEWORK = {
 }
 
 
+# 日志文件
+BASE_LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), "logs")
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {  # 配置打印日志格式
+        'standard': {  # name:记录器的名称  lineo:执行日志记录调用的行号 module:执行日志记录调用的模块名称 funcName:模块中调用的函数  levelname：日志级别
+            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}
+        # 日志格式
+    },
+    'handlers': {  # 用来定义具体处理日志的方式(规定日志输出到哪里)，可以定义多种，"default"就是默认方式，"console"就是打印到控制台方式
+        'default': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_LOG_DIR, "dj_info.log"),  # 日志输出文件
+            'maxBytes': 1024 * 1024 * 5,  # 文件大小
+            'backupCount': 5,  # 备份份数
+            'formatter': 'standard',  # 使用哪种formatters日志格式
+        },
+        'error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_LOG_DIR, "dj_error.log"),
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'request_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_LOG_DIR, "dj_debug.log"),
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        # # 在终端打印
+        # 'console': {
+        #     'level': 'DEBUG',
+        #     'filters': ['require_debug_true'],  # 只有在Django debug为True时才在屏幕打印日志
+        #     'class': 'logging.StreamHandler',  #
+        #     'formatter': 'simple'
+        # },
+    },
+    'loggers': {  # LOGGER记录器,配置用那种handlers来处理日志，比如你同时需要输出日志到文件、控制台。----logger传递日志到handler
+        'django': {  # django 表示就是django本身默认的控制台输出
+            'handlers': ['default'],  # 输出日志到handlers中default中指定路径的文件中
+            'level': 'DEBUG',
+            'propagate': False  # 向不向更高级别的logger传递
+        },
+        'django.request': {  # 配合上面的将警告log写入到另外一个文件------django logger为django.request的上级
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'views_error': {
+            'handlers': ['default', 'error', 'request_handler'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+
+    },
+    # 'filters': {  # 控制哪些日志可以从logger流向Handler
+    #
+    # },
+}
 
 

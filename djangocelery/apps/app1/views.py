@@ -8,12 +8,24 @@ from apps.app1.utils.permissions import Mypermission, Mypermission2
 from apps.app1.utils.throttle import *
 import json
 
+import logging
+
+# logger = logging.getLogger('django.request')
+logger = logging.getLogger(__name__)
+
+
 
 def index(request):
     return render(request, 'index.html')
 
 
 def index_app1(request):
+    logger.info("1231231231231231233123123")
+    logger.info(logger.name)
+    logger.debug("00000000000000000000000000000000")
+    logger.warning("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+    print(logger.name)
+    logger.error("5656565656565656565656565")
     return render(request, 'index_app1.html')
 
 
@@ -125,10 +137,10 @@ class UserInfoView(APIView):
         return HttpResponse("用户信息")
 
 
+# #--------------序列化的实现方法------------------------##
 
+# 序列化1--简单实现
 from rest_framework import serializers
-
-
 class RolesSerializer(serializers.Serializer):
     title = serializers.CharField()
 
@@ -147,7 +159,7 @@ class RolesView(APIView):
         return HttpResponse(ret)
 
 
-
+# 序列化2--基于serializers.Serializer简单实现+功能添加
 # 对于字段中含有ChOICE这种类型的字段可以使用soource参数  or 自定义方法来取数据
 class UserInfo2Serializer(serializers.Serializer):
     # user_type = serializers.IntegerField()
@@ -175,6 +187,7 @@ class UserInfo2View(APIView):
         return HttpResponse(ret)
 
 
+# 序列化3--基于serializers.ModelSerializer类实现序列化
 # 使用serializers.ModelSerializer，可以结合数据库，帮助用户快速序列化，但是仍可以自定义来完善字段内容
 class UserInfo3Serializer(serializers.ModelSerializer):
     oooo = serializers.CharField(source='get_user_type_display')
@@ -199,7 +212,7 @@ class UserInfo3View(APIView):
         return HttpResponse(ret)
 
 
-
+# 序列化4--基于serializers.ModelSerializer类实现序列化，使用元类中的depth字段
 # 使用serializers.ModelSerializer,中的元类里面的depth，可以完成上边的操作，嵌套的查询数据库中的字段内容
 class UserInfo4Serializer(serializers.ModelSerializer):
     groupp = serializers.HyperlinkedIdentityField(view_name='gp',lookup_field='groupp_id',lookup_url_kwarg='ww')
@@ -232,6 +245,8 @@ class GroupView(APIView):
 
 
 
+
+# 序列化中字段验证的实现--1-字段参数   2--钩子函数
 class xxxvalidator(object):
     def __init__(self,base):
         self.base = base
@@ -256,7 +271,7 @@ class UserGroupView(APIView):
 
 
 
-
+# 分页功能1--基于PageNumberPagination类的分页实现
 class PagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Role
@@ -280,7 +295,7 @@ class Pager1View(APIView):
 
 
 
-
+# 分页功能2--基于LimitOffsetPagination类的分页实现
 from rest_framework.pagination import LimitOffsetPagination
 class MyPagination(LimitOffsetPagination):
 
@@ -302,7 +317,7 @@ class Pager2View(APIView):
         # return Response(ret)
         return Response(ser.data)
 
-
+# 分页功能3--基于CursorPagination类的分页实现
 from rest_framework.pagination import CursorPagination
 class MyPagination3(CursorPagination):
 
@@ -331,13 +346,60 @@ class Pager3View(APIView):
 
 
 
+# 视图-基于GenericAPIView类实现（不常用）
+from rest_framework.generics import GenericAPIView
+class GenericView(GenericAPIView):
+
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerializer
+    pagination_class = PageNumberPagination
+
+    def get(self,request, *args, **kwargs):
+        # 获取数据
+        roles = self.get_queryset() # 获取上边的queryset
+        # 分页
+        pager_roles = self.paginate_queryset(roles)
+        # 序列化
+        ser = self.get_serializer(instance=pager_roles,many=True)
+
+        return Response(ser.data)
+
+# 视图 - 基于GenericViewset类实现
+from rest_framework.viewsets import GenericViewSet
+class GenericViewsetView(GenericViewSet):
+
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerializer
+    pagination_class = PageNumberPagination
+
+    def list(self,request, *args, **kwargs):
+        # 获取数据
+        roles = self.get_queryset() # 获取上边的queryset
+        # 分页
+        pager_roles = self.paginate_queryset(roles)
+        # 序列化
+        ser = self.get_serializer(instance=pager_roles,many=True)
+
+        return Response(ser.data)
 
 
+# 视图 - 基于ModelViewSet类实现
+from rest_framework.viewsets import ModelViewSet
+class ModelViewsetView(ModelViewSet):
 
+    queryset = models.Role.objects.all()
+    serializer_class = PagerSerializer
+    pagination_class = PageNumberPagination
 
-
-
-
+    # def list(self,request, *args, **kwargs):
+    #     # 获取数据
+    #     roles = self.get_queryset() # 获取上边的queryset
+    #     # 分页
+    #     pager_roles = self.paginate_queryset(roles)
+    #     # 序列化
+    #     ser = self.get_serializer(instance=pager_roles,many=True)
+    #
+    #     return Response(ser.data)
 
 
 

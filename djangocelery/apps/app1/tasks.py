@@ -1,15 +1,15 @@
 from __future__ import absolute_import, unicode_literals
 from djangocelery.celery import app
 
-#
-# @app.task
-# def add(x,y):
-#
-#     sum = x + y
-#     # print(sum)
-#     return x + y
+import logging
 
-from time import sleep
+logger = logging.getLogger('views_error')
+
+
+
+
+
+# from time import sleep
 
 
 # @app.task
@@ -35,14 +35,29 @@ from time import sleep
 #         progress = task.info['progress']
 #
 #     return {'status': status, 'progress': progress}
-
 # 使用内部的钩子函数，对函数进行重写，实现自己需要的功能
-from celery import Task
-class demotask(Task):
-
+# from celery import Task
+# class demotask(Task):
+from time import sleep
+import random
+i = 0
 
 @app.task
 def add(x,y):
+    # logger.info("shenmdongxi")
+    # logger.error("asdfasdfsadfsadfsadfsadfasdfwadf")
+    global i
+    j = random.randint(7,9)
+    print("this is a task test ---- start")
+    sleep(j)
+    print("this is a task test ---- end")
+    i += 1
+    print('i={},j={}'.format(i,j))
     return x + y
+
+# @app.task
+# def add1(x,y):
+#     print("wellcome mieba")
+#     return x + y
 
 
