@@ -2,8 +2,8 @@ from __future__ import absolute_import, unicode_literals
 from djangocelery.celery import app
 
 import logging
-
-logger = logging.getLogger('views_error')
+#
+# logger = logging.getLogger('views_error')
 
 
 
@@ -41,23 +41,45 @@ logger = logging.getLogger('views_error')
 from time import sleep
 import random
 i = 0
-
-@app.task
+m = 0
+from celery.exceptions import SoftTimeLimitExceeded
+# @app.task(time_limit=8)
+# soft_time_limit  用于设置软时间设置，当任务执行时间超过这个时间，就会报错
+# time_limit=10
+@app.task(soft_time_limit=10)
 def add(x,y):
+    # try:
     # logger.info("shenmdongxi")
     # logger.error("asdfasdfsadfsadfsadfsadfasdfwadf")
     global i
-    j = random.randint(7,9)
+    global m
+    m += 10
+    j = random.randint(6,9)
     print("this is a task test ---- start")
     sleep(j)
     print("this is a task test ---- end")
     i += 1
     print('i={},j={}'.format(i,j))
+
+    print(m)
+    return x + y
+    # except SoftTimeLimitExceeded:
+    #     print(SoftTimeLimitExceeded)
+
+@app.task
+def add1(x,y):
+    global m
+    print("add1:",m)
     return x + y
 
-# @app.task
-# def add1(x,y):
-#     print("wellcome mieba")
-#     return x + y
+
+# from subprocess import call
+def restart_pm2():
+    from subprocess import call
+    print('1231212312312312321')
+
+    t = call(['pm2', 'start', 'all'])
+    print(t)
+
 
 

@@ -13,9 +13,10 @@ import logging
 # logger = logging.getLogger('django.request')
 logger = logging.getLogger(__name__)
 
-
+from app1.tasks import restart_pm2
 
 def index(request):
+    restart_pm2()
     return render(request, 'index.html')
 
 

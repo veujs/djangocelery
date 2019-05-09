@@ -29,11 +29,12 @@ SECRET_KEY = 'zgvq)=zp!@w@rh%b!3g=4@*c57fn9=rat5#3#etb7v()i6olx9'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+import django_crontab
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'apps.app2.apps.App2Config',
     'djcelery',
     'rest_framework',
+
+
 
 ]
 
@@ -145,16 +148,16 @@ CELERY_ACCEPT_CONTENT = ['json']                    # 指定任务接受的内�
 CELERY_IMPORTS = ('app1.tasks', )                    # 定义任务所在的模块
 CELERY_TIMEZONE = 'Asia/Shanghai'                   # 时区设置，计划任务需要，推荐 Asia/Shanghai
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-CELERYD_CONCURRENCY = 1                             # worker并发数   任务消费者的并发数
+CELERYD_CONCURRENCY = 3                             # worker并发数   任务消费者的并发数
 CELERYD_PREFETCH_MULTIPLIER = 1  # 每个worker 领取一个任务
-CELERYD_FORCE_EXECV = True
+# CELERYD_FORCE_EXECV = True
 CELERYD_MAX_TASKS_PER_CHILD = 100  # 每个worker最多执行玩100个任务就会被销毁，可防止内存泄露
 
 
 
-CELERY_FORCE_EXECV = True# 有些情况可以防止死锁
+# CELERY_FORCE_EXECV = True# 有些情况可以防止死锁
 # CELERY_QUEUES # Celery队列设定
-CELERY_TASK_RESULT_EXPIRES = 5 # 60 * 60 * 24   # 任务结果的过期时间，在上边设置的redis中
+CELERY_TASK_RESULT_EXPIRES = 50 # 60 * 60 * 24   # 任务结果的过期时间，在上边设置的redis中
 # 规定完成任务的时间
 # CELERYD_TASK_TIME_LIMIT = 5 #15 * 60 # 在15分钟内完成任务，否则执行该任务的worker将被杀死，任务移交给父进程
 
@@ -171,16 +174,20 @@ CELERYBEAT_SCHEDULE = {
         "schedule": timedelta(seconds=5),
         "args": (100, 200),
     },
-    # # 定时任务二：　每隔s运行一次
-    # 'task2': {
-    #     "task": "app1.tasks.add1",
-    #     "schedule": timedelta(seconds=3),
-    #     "args": (10, 20),
-    # },
+    # 定时任务二：　每隔s运行一次
+    'task2': {
+        "task": "app1.tasks.add1",
+        "schedule": timedelta(seconds=1),
+        "args": (10, 20),
+    },
 }
 
 
 
+
+CRONJOBS = [
+    ('*/1 * * * *', 'app1.tasks.restart_pm2', '>>/home/wangzhipeng/myproject/crontab.log')
+]
 
 
 
