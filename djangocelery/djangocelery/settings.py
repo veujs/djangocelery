@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 import django_crontab
 
 # Application definition
-
 INSTALLED_APPS = [
     'django_crontab',
     'django.contrib.admin',
@@ -182,19 +181,18 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-
+from django.core.management.base import BaseCommand
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'app1.tasks.restart_pm2', '>>/home/wangzhipeng/myproject/crontab.log')
+    # ('*/1 * * * *', 'app名.定时函数所在的py文件名.定时函数名', '>> 输出文件路径和名称')
+    # 每1分钟执行restart_pm2函数，并将执行中的返回的内容全部打印到crontab.log文件中
+    ('*/1 * * * *', 'app1.tasks.restart_pm2', '>>/home/wangzhipeng/myproject/crontab.log'),
+
+    # 每1分钟执行django的自定义命令，并将执行中的返回的内容全部打印到crontab.log文件中
+    ('*/1 * * * *', 'django.core.management.call_command', ['mycommand1'], {"param": "mycommand1_test"}, '>>/home/wangzhipeng/myproject/crontab.log'),
+    ('*/1 * * * *', 'django.core.management.call_command', ['mycommand2'], {"param": "mycommand2_test"}, '>>/home/wangzhipeng/myproject/crontab.log')
 ]
-
-
-
-
-
-
-
 
 
 

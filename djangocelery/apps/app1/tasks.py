@@ -75,11 +75,15 @@ def add1(x,y):
 
 # from subprocess import call
 def restart_pm2():
-    from subprocess import call
-    print('1231212312312312321')
 
-    t = call(['pm2', 'start', 'all'])
-    print(t)
+    from time import strftime, localtime
+    print(strftime("%Y-%m-%d %H:%M:%S", localtime()), end='')
+    print(": 执行了restart_pm2函数")
+
+    # from subprocess import call
+    # print(":  1小时任务没有更新，重启pm2中....")
+    #t = call(['pm2', 'start', 'all'])
+    #print(t)
 
 
 
