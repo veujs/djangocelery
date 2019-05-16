@@ -26,9 +26,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'zgvq)=zp!@w@rh%b!3g=4@*c57fn9=rat5#3#etb7v()i6olx9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 import django_crontab
 
 # Application definition
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
+# https://docs.djangoproject.com/en/2.2/topics/i18n/True
 
 LANGUAGE_CODE = 'zh-Hans'
 
@@ -246,17 +246,24 @@ BASE_LOG_DIR = os.path.join(os.path.dirname(BASE_DIR), "logs")
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {  # 配置打印日志格式
         'standard': {  # name:记录器的名称  lineo:执行日志记录调用的行号 module:执行日志记录调用的模块名称 funcName:模块中调用的函数  levelname：日志级别
             'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}
         # 日志格式
     },
+
+    # 'filters': {  # 过滤器   # 控制哪些日志可以从logger流向Handler
+    #     'require_debug_true': {
+    #         '()': 'django.utils.log.RequireDebugTrue',
+    #     },
+    # },
+
     'handlers': {  # 用来定义具体处理日志的方式(规定日志输出到哪里)，可以定义多种，"default"就是默认方式，"console"就是打印到控制台方式
         'default': {
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "dj_info.log"),  # 日志输出文件
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',  # 会根据文件大小自动切
+            'filename': os.path.join(BASE_LOG_DIR, "warning.log"),  # 日志输出文件名称
             'maxBytes': 1024 * 1024 * 5,  # 文件大小
             'backupCount': 5,  # 备份份数
             'formatter': 'standard',  # 使用哪种formatters日志格式
@@ -264,7 +271,7 @@ LOGGING = {
         'error': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "dj_error.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "error.log"),
             'maxBytes': 1024 * 1024 * 5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -272,7 +279,7 @@ LOGGING = {
         'request_handler': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "dj_debug.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "debug.log"),
             'maxBytes': 1024 * 1024 * 5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -285,27 +292,39 @@ LOGGING = {
         #     'formatter': 'simple'
         # },
     },
+
     'loggers': {  # LOGGER记录器,配置用那种handlers来处理日志，比如你同时需要输出日志到文件、控制台。----logger传递日志到handler
-        'django': {  # django 表示就是django本身默认的控制台输出
-            'handlers': ['default'],  # 输出日志到handlers中default中指定路径的文件中
+        # 以下三个为django基本需要的记录器，尽量不要动
+
+        # ‘’ 日志实例对象默认配置（需要'disable_existing_loggers': False才能生效）,此时在别的模块中使用logger_default = logging.getLogger(__name__),记录器的名称为该模块的名称，并使用default处理器来处理日志
+        '': {
+            'handlers': ['default'],
             'level': 'DEBUG',
             'propagate': False  # 向不向更高级别的logger传递
         },
-        'django.request': {  # 配合上面的将警告log写入到另外一个文件------django logger为django.request的上级
+
+        'django': {  # 若将对应的handler中的level等级改为DEBUG，那么会在日志文件中把所有的信息打印出来，包括对数据库的操作（前提是django开启的是DEBUG模式！！）
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': False  # 向不向更高级别的logger传递
+        },
+
+        'django.request': {  # 这个记录器用于记录django框架里面的所有request请求的记录，名称必须为django.request！！！！
             'handlers': ['request_handler'],
             'level': 'DEBUG',
             'propagate': False,
         },
-        'views_error': {
-            'handlers': ['default', 'error', 'request_handler'],
+
+
+        # 下面自定义记录器
+        'views_error': {  #
+            'handlers': ['default', 'error', 'request_handler'],  # 会根据三个handler中日志的等级，在其对应的日志文件中进行打印
             'level': 'DEBUG',
             'propagate': True
         },
 
     },
-    # 'filters': {  # 控制哪些日志可以从logger流向Handler
-    #
-    # },
+
 }
 
 

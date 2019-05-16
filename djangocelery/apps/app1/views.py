@@ -9,24 +9,29 @@ from apps.app1.utils.throttle import *
 import json
 
 import logging
-
 # logger = logging.getLogger('django.request')
-logger = logging.getLogger(__name__)
-
+# logger = logging.getLogger('views_error')
+logger110 = logging.getLogger(__name__)
 from app1.tasks import restart_pm2
 
+
 def index(request):
-    restart_pm2()
+    logger110.info("info: this is a info level")
+    logger110.debug("debug: this is a debug level")
+    logger110.warning("warning: this is a warning level")
+
+    logger110.error("error: this is a error level")
+    print(logger110.name)
     return render(request, 'index.html')
 
 
 def index_app1(request):
-    logger.info("1231231231231231233123123")
-    logger.info(logger.name)
-    logger.debug("00000000000000000000000000000000")
-    logger.warning("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
-    print(logger.name)
-    logger.error("5656565656565656565656565")
+    # logger.info("1231231231231231233123123")
+    # logger.info(logger.name)
+    # logger.debug("00000000000000000000000000000000")
+    # logger.warning("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
+    # print(logger.name)
+    # logger.error("5656565656565656565656565")
     return render(request, 'index_app1.html')
 
 
@@ -374,6 +379,15 @@ class GenericViewsetView(GenericViewSet):
     pagination_class = PageNumberPagination
 
     def list(self,request, *args, **kwargs):
+
+
+        logger110.info("infoinfoinfoinfoinfoinfoinfo")
+        logger110.debug("debugdebugdebugdebugdebugdebug")
+        logger110.warning("warningwarningwarningwarningwarning")
+
+        logger110.error("errorerrorerrorerrorerrorerrorerrorerror")
+        print(logger110.name)
+
         # 获取数据
         roles = self.get_queryset() # 获取上边的queryset
         # 分页

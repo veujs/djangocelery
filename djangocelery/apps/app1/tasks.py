@@ -2,8 +2,7 @@ from __future__ import absolute_import, unicode_literals
 from djangocelery.celery import app
 
 import logging
-#
-# logger = logging.getLogger('views_error')
+logger = logging.getLogger('views_error')
 
 
 
@@ -70,6 +69,7 @@ def add(x,y):
 def add1(x,y):
     global m
     print("add1:",m)
+    # logger.error("add1add1add1add1add1add1add1add1")
     return x + y
 
 

@@ -1,0 +1,2 @@
+2019-05-16 10:48:31,981 [Thread-1:140200123873024] [apps.app1.views:21] [views:index] [WARNING]- warning: this is a warning level
+2019-05-16 10:48:31,981 [Thread-1:140200123873024] [apps.app1.views:23] [views:index] [ERROR]- error: this is a error level
