@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="465f3913-cb8e-4adb-b528-822ba73e75b9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangocelery/apps/app1/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangocelery/apps/app1/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangocelery/apps/app1/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangocelery/apps/app1/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangocelery/apps/app1/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangocelery/apps/app1/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangocelery/djangocelery/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangocelery/djangocelery/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/dj_debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/dj_error.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/dj_info.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/warning.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/warning.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="792">
+              <caret line="225" column="31" lean-forward="true" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -75,10 +70,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/djangocelery/venv/lib/python3.6/site-packages/rest_framework/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4070">
+              <caret line="202" column="46" selection-start-line="202" selection-start-column="46" selection-end-line="202" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="220">
+                <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/djangocelery/djangocelery/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
+            <state relative-caret-position="6732">
+              <caret line="309" column="10" lean-forward="true" selection-start-line="309" selection-start-column="10" selection-end-line="309" selection-end-column="10" />
               <folding>
                 <element signature="e#311#320#0" expanded="true" />
               </folding>
@@ -89,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="528">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
@@ -98,11 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
+            <state relative-caret-position="572">
               <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-              <folding>
-                <element signature="e#66#107#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -165,10 +178,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="794" />
-    <option name="y" value="229" />
-    <option name="width" value="1321" />
-    <option name="height" value="817" />
+    <option name="x" value="679" />
+    <option name="y" value="134" />
+    <option name="width" value="1196" />
+    <option name="height" value="918" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -201,6 +214,14 @@
               <item name="djangocelery" type="462c0819:PsiDirectoryNode" />
               <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="app1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="djangocelery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="djangocelery" type="462c0819:PsiDirectoryNode" />
+              <item name="djangocelery" type="462c0819:PsiDirectoryNode" />
+              <item name="apps" type="462c0819:PsiDirectoryNode" />
+              <item name="app1" type="462c0819:PsiDirectoryNode" />
+              <item name="models.py" type="8704e2dd:PyFileNode" />
             </path>
             <path>
               <item name="djangocelery" type="b2602c69:ProjectViewProjectNode" />
@@ -298,7 +319,18 @@
       <workItem from="1557217080842" duration="24266000" />
       <workItem from="1557389837557" duration="11967000" />
       <workItem from="1557480071791" duration="2021000" />
-      <workItem from="1557903390780" duration="15124000" />
+      <workItem from="1557903390780" duration="15327000" />
+      <workItem from="1558063825377" duration="32000" />
+      <workItem from="1558335364014" duration="3729000" />
+      <workItem from="1558438083042" duration="60000" />
+      <workItem from="1560393415870" duration="672000" />
+      <workItem from="1560400825142" duration="1202000" />
+      <workItem from="1560494607096" duration="196000" />
+      <workItem from="1560500301993" duration="4307000" />
+      <workItem from="1560664076150" duration="599000" />
+      <workItem from="1560736139570" duration="3000" />
+      <workItem from="1560844658318" duration="1334000" />
+      <workItem from="1560909320941" duration="1727000" />
     </task>
     <task id="LOCAL-00001" summary="“分页功能测试”">
       <created>1557114082993</created>
@@ -318,13 +350,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156799000" />
+    <option name="totallyTimeSpent" value="170863000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="2487" height="1219" extended-state="7" />
-    <editor active="true" />
+    <frame x="67" y="25" width="2491" height="1226" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27347273" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13999182" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -338,7 +369,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.33270678" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.231203" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23155929" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32800752" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32575756" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -457,13 +488,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangocelery/venv/lib/python3.6/site-packages/rest_framework/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="376" column="23" selection-start-line="376" selection-start-column="23" selection-end-line="376" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/djangocelery/venv/lib/python3.6/site-packages/djcelery/schedulers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -563,26 +587,6 @@
     <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/management/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="154">
-            <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/management/commands/mycommand1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -603,37 +607,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/models.py">
+    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/tasks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        <state relative-caret-position="66">
+          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/urls.py">
+    <entry file="file://$PROJECT_DIR$/djangocelery/venv/lib/python3.6/site-packages/rest_framework/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-          <folding>
-            <element signature="e#66#107#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="4070">
+          <caret line="202" column="46" selection-start-line="202" selection-start-column="46" selection-end-line="202" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="220">
+            <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/djangocelery/djangocelery/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="304" lean-forward="true" selection-start-line="304" selection-end-line="304" />
+        <state relative-caret-position="6732">
+          <caret line="309" column="10" lean-forward="true" selection-start-line="309" selection-start-column="10" selection-end-line="309" selection-end-column="10" />
           <folding>
             <element signature="e#311#320#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/djangocelery/apps/app1/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="792">
+          <caret line="225" column="31" lean-forward="true" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

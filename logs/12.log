@@ -1,0 +1,4 @@
+2019-06-14 21:15:10,143 [Thread-1:140195336853248] [apps.app1.views:21] [views:index] [WARNING]- warning: this is a warning level
+2019-06-14 21:15:10,143 [Thread-1:140195336853248] [apps.app1.views:23] [views:index] [ERROR]- error: this is a error level
+2019-06-14 21:15:50,702 [Thread-1:140620127315712] [apps.app1.views:21] [views:index] [WARNING]- warning: this is a warning level
+2019-06-14 21:15:50,703 [Thread-1:140620127315712] [apps.app1.views:23] [views:index] [ERROR]- error: this is a error level

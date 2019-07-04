@@ -263,7 +263,7 @@ LOGGING = {
         'default': {
             'level': 'WARNING',
             'class': 'logging.handlers.RotatingFileHandler',  # 会根据文件大小自动切
-            'filename': os.path.join(BASE_LOG_DIR, "warning.log"),  # 日志输出文件名称
+            'filename': os.path.join(BASE_LOG_DIR, "12.log"),  # 日志输出文件名称
             'maxBytes': 1024 * 1024 * 5,  # 文件大小
             'backupCount': 5,  # 备份份数
             'formatter': 'standard',  # 使用哪种formatters日志格式
@@ -271,7 +271,7 @@ LOGGING = {
         'error': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "error.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "12.log"),
             'maxBytes': 1024 * 1024 * 5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -279,7 +279,7 @@ LOGGING = {
         'request_handler': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_LOG_DIR, "debug.log"),
+            'filename': os.path.join(BASE_LOG_DIR, "12.log"),
             'maxBytes': 1024 * 1024 * 5,
             'backupCount': 5,
             'formatter': 'standard',
@@ -320,7 +320,7 @@ LOGGING = {
         'views_error': {  #
             'handlers': ['default', 'error', 'request_handler'],  # 会根据三个handler中日志的等级，在其对应的日志文件中进行打印
             'level': 'DEBUG',
-            'propagate': True
+            'propagate': False
         },
 
     },
